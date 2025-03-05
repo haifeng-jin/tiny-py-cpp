@@ -1,3 +1,6 @@
+dist
+my_extensions.egg-info
+
 # Prerequisites
 *.d
 
