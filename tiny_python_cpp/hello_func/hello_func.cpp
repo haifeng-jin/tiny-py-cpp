@@ -1,5 +1,6 @@
 #include <Python.h>
 #include <iostream>
+#include "hello_func.h"
 
 static PyObject* hello_func_hello_world(PyObject* self, PyObject* args) {
     // This function corresponds to the Python function hello_world()
@@ -8,7 +9,12 @@ static PyObject* hello_func_hello_world(PyObject* self, PyObject* args) {
 }
 
 static PyMethodDef HelloFuncMethods[] = {
-    {"hello_world", hello_func_hello_world, METH_NOARGS, "Prints 'Hello, world!'"},
+    {
+        "hello_world",         // The name of the function as it will be seen in Python.
+        hello_func_hello_world, // The C function pointer that implements the Python function.
+        METH_NOARGS,           // The calling convention: METH_NOARGS indicates the function takes no arguments.
+        "Prints 'Hello, world!'" // The docstring for the Python function.
+    },
     {NULL, NULL, 0, NULL} // Sentinel value ending the table
 };
 
@@ -20,6 +26,9 @@ static struct PyModuleDef hellofuncmodule = {
     HelloFuncMethods
 };
 
+// This function initializes the Python module.
+// The function signature has to be:
+// PyMODINIT_FUNC PyInit_<module_name>(void)
 PyMODINIT_FUNC PyInit_hello_func(void) {
     return PyModule_Create(&hellofuncmodule);
 }

@@ -1,5 +1,6 @@
+build
 dist
-my_extensions.egg-info
+egg-info
 
 # Prerequisites
 *.d

@@ -1,5 +1,6 @@
 #include <Python.h>
 #include <iostream>
+#include "hello_class.h"
 
 typedef struct {
     PyObject_HEAD

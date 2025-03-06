@@ -1,9 +1,7 @@
-# main.py
-import hello_func
-import hello_class
+import tiny_python_cpp
 
-hello_func.hello_world()
+tiny_python_cpp.hello_func.hello_world()
 
-hello_instance = hello_class.Hello("Alice")
+hello_instance = tiny_python_cpp.hello_class.Hello("Alice")
 hello_instance.hello()
-hello_class.Hello.hello_world()
+tiny_python_cpp.hello_class.Hello.hello_world()
