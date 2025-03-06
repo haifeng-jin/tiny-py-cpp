@@ -2,13 +2,14 @@
 #include <iostream>
 #include "hello_class.h"
 
+// Define the attributes of the Python class.
 typedef struct {
     PyObject_HEAD
     PyObject* name;
 } HelloObject;
 
+// Constructor of the Hello class
 static int Hello_init(HelloObject* self, PyObject* args, PyObject* kwds) {
-    // Constructor of the Hello class
     const char* name;
     if (!PyArg_ParseTuple(args, "s", &name)) {
         return -1;
@@ -20,12 +21,13 @@ static int Hello_init(HelloObject* self, PyObject* args, PyObject* kwds) {
     return 0;
 }
 
+// Destructor of the Hello class
 static void Hello_dealloc(HelloObject* self) {
-    // Destructor of the Hello class
     Py_XDECREF(self->name);
     Py_TYPE(self)->tp_free((PyObject*)self);
 }
 
+// Print the hello with the name attribute
 static PyObject* Hello_hello(HelloObject* self) {
     PyObject* format_string = PyUnicode_FromString("Hello, %s!");
     if (format_string == NULL) {
@@ -48,12 +50,13 @@ static PyObject* Hello_hello(HelloObject* self) {
     Py_RETURN_NONE;
 }
 
+// Static method hello_world()
 static PyObject* Hello_hello_world(PyTypeObject* type) {
-    // Static method hello_world()
     std::cout << "Hello, world!" << std::endl;
     Py_RETURN_NONE;
 }
 
+// The methods in the class.
 static PyMethodDef HelloMethods[] = {
     {"hello", (PyCFunction)Hello_hello, METH_NOARGS, "Prints a greeting with the instance's name."},
     {"hello_world", (PyCFunction)Hello_hello_world, METH_NOARGS | METH_STATIC, "Prints 'Hello, world!'"},

@@ -2,12 +2,14 @@
 #include <iostream>
 #include "hello_func.h"
 
+// This function prints the hello world
 static PyObject* hello_func_hello_world(PyObject* self, PyObject* args) {
     // This function corresponds to the Python function hello_world()
     std::cout << "Hello, world!" << std::endl;
     Py_RETURN_NONE; // Return None in Python
 }
 
+// A list of methods in the module.
 static PyMethodDef HelloFuncMethods[] = {
     {
         "hello_world",         // The name of the function as it will be seen in Python.
@@ -18,12 +20,13 @@ static PyMethodDef HelloFuncMethods[] = {
     {NULL, NULL, 0, NULL} // Sentinel value ending the table
 };
 
+// This is a struct contains all the info about the module.
 static struct PyModuleDef hellofuncmodule = {
     PyModuleDef_HEAD_INIT,
     "hello_func", // Module name
     "A module that prints hello world.", // Module docstring
     -1, // Size of per-interpreter state of the module, or -1 if the module keeps state in global variables.
-    HelloFuncMethods
+    HelloFuncMethods // The methods in the module
 };
 
 // This function initializes the Python module.
